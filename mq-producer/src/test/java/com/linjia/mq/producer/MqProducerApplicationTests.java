@@ -1,0 +1,29 @@
+package com.linjia.mq.producer;
+
+import com.linjia.mq.producer.service.SimpleProducer;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.io.IOException;
+
+@SpringBootTest
+class MqProducerApplicationTests {
+
+    @Autowired
+    private SimpleProducer simpleProducer;
+
+    @Test
+    void hellMQ() {
+        for (int i = 0; i < 100; i++) {
+            simpleProducer.send("消息"+i);
+        }
+        try {
+            // 阻塞进程，使消费者能够正常监听消费
+            System.in.read();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+}

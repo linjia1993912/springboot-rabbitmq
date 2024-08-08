@@ -1,0 +1,50 @@
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: mq-consumer
+  profiles:
+    active: ack
+
+# 基础配置
+---
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    # rabbit 默认的虚拟主机
+    virtual-host: /
+  config:
+    activate:
+      on-profile: base
+
+
+# 手动ack以及并行消费配置
+---
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    # rabbit 默认的虚拟主机
+    virtual-host: /
+    listener:
+      simple:
+        # manual 手动确认
+        acknowledge-mode: manual
+        # 消费者每次监听消费最小数量 (并发量) 即@RabbitListener开启几个线程去处理数据
+        concurrency: 2
+        max-concurrency: 10
+        # 每次从Broker预拉取的消息数量
+        # 每个customer会在MQ预取一些消息放入内存的LinkedBlockingQueue中进行消费，这个值越高，消息传递的越快，但非顺序处理消息的风险更高。如果ack模式为none，则忽略。如有必要，将增加此值以匹配txSize或messagePerAck。从2.0开始默认为250；设置为1将还原为以前的行为。
+        prefetch: 10
+        # 如果开启了manual手动确认并且配置了prefetch,在消费的时候没有进行ack,也就是说当我们消费完12条信息后，并没有进行ack，会导致Consumer并不会从Broker继续拉取消息
+  config:
+    activate:
+      on-profile: ack
+
