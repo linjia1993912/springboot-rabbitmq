@@ -6,7 +6,7 @@ spring:
   application:
     name: mq-consumer
   profiles:
-    active: ack
+    active: base
 
 # 基础配置
 ---
