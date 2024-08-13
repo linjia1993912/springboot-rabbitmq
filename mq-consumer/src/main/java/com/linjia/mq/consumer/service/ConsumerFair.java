@@ -14,6 +14,7 @@ import com.rabbitmq.client.Channel;
  * @description: 消费者-公平分发
  * 能者多劳
  * 根据消费者的消费能力进行公平分发，处理快的处理的多，处理慢的处理的少；按劳分配；
+ * 公平分发需要消费者开启手动应答，关闭自动应答
  * @date 2024/8/8
  */
 @Component
