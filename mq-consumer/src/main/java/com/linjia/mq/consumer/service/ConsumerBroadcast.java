@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author LinJia
- * @description: 消费者-广播模式
+ * @description: 消费者-发布订阅模式
  * 在Spring Boot中集成RabbitMQ并实现发布订阅模式，可以使用RabbitMQ的Fanout Exchange类型。
  * Fanout Exchange将接收到的消息广播给绑定到该交换机的所有队列，从而实现发布订阅模式，确保所有消费者都能收到消息。
  * @date 2024/8/13

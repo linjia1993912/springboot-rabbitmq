@@ -56,7 +56,7 @@ public class ConsumerParallel {
      * @Param [msg]
      * @return void
      */
-    //@RabbitListener(queues = "DemoMQ")
+    @RabbitListener(queues = "DemoMQ")
     public void receiveACK2(Message message, Channel channel) {
         try {
             String msg = new String(message.getBody());
