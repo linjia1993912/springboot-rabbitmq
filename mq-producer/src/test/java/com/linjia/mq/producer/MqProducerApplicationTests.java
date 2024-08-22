@@ -44,4 +44,22 @@ class MqProducerApplicationTests {
         }
     }
 
+    /**
+     * @Description: 发布订阅模式
+     * @Author LinJia
+     * @Date 2024/8/14
+     * @Param []
+     * @return void
+     */
+    @Test
+    void broadcastQueue() {
+        simpleProducer.broadcastQueue("这是一个广播到指定队列的消息");
+        try {
+            // 阻塞进程，使消费者能够正常监听消费
+            System.in.read();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

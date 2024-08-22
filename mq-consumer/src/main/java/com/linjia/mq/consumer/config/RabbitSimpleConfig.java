@@ -17,6 +17,8 @@ public class RabbitSimpleConfig {
 
     /**
      * 设置一个简单的队列
+     *
+     * 每个队列都会有一个默认交换机，当不指定交换机时，消息会被发送到默认交换机，默认交换机类型为direct，路由键为队列名称
      */
     @Bean
     public Queue queue() {
@@ -24,7 +26,7 @@ public class RabbitSimpleConfig {
     }
 
     /**
-     * 声明交换机
+     * 创建扇形交换机
      *
      * @return 交换机
      */
